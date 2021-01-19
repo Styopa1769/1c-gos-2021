@@ -1,6 +1,3 @@
-import com.sun.org.slf4j.internal.Logger;
-import com.sun.org.slf4j.internal.LoggerFactory;
-
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -8,10 +5,12 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
 public class TemplateSerializer {
-    private final static Logger LOGGER = LoggerFactory.getLogger(TemplateSerializer.class);
+    private final static Logger LOGGER = Logger.getGlobal();
 
     private final static Character DELIMITER = '#';
     private final static String FORMATTER = "%s";
@@ -82,7 +81,7 @@ public class TemplateSerializer {
             List<String> lines = Files.readAllLines(pathToInputFile);
             lines.forEach(line -> result.add(serializeLine(line)));
         } catch (IOException e) {
-            LOGGER.warn("Failed to serialize file:  " + pathToInputFile, e);
+            LOGGER.log(Level.WARNING, e, () -> "Failed to serialize file:  " + pathToInputFile);
         }
 
         return result;
@@ -93,7 +92,7 @@ public class TemplateSerializer {
         try {
             Files.write(pathToOutputFile, lines);
         } catch (IOException e) {
-            LOGGER.warn("Failed to deserialize lines: " + lineValues, e);
+            LOGGER.log(Level.WARNING, e, () -> "Failed to deserialize lines: " + lineValues);
         }
     }
 
