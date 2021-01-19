@@ -48,7 +48,7 @@ public class TemplateSerializer {
         this.hasValueAtEnd = hasValueAtEnd;
     }
 
-    private List<String> serializeLine(String line){
+    public List<String> serializeLine(String line){
         List<String> result = new ArrayList<>();
 
         Map<Pattern, Integer> indexCache = new HashMap<>(patterns.size());
@@ -70,7 +70,7 @@ public class TemplateSerializer {
         return result;
     }
 
-    private String deserializeLine(List<String> values){
+    public String deserializeLine(List<String> values){
         return String.format(format, values.toArray());
     }
 

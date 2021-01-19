@@ -36,3 +36,13 @@
 
 ## Запуск тестов
 mvn test
+
+## UPD, наконец прочел тред в слаке и понял, что сделал все не так:
+сериализация: 
+```
+.\serialize.sh inputfile outputfile
+```
+десериализация:
+```
+.\deserialize.sh inputfile outputfile
+```
